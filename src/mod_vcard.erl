@@ -821,7 +821,7 @@ make_val(Match, Field, Val) ->
     Condition = case str:suffix(<<"*">>, Val) of
 		  true ->
 		      Val1 = str:substr(Val, 1, byte_size(Val) - 1),
-		      SVal = <<(ejabberd_odbc:escape_like(Val1))/binary,
+		      SVal = <<"%",(ejabberd_odbc:escape_like(Val1))/binary,
 			       "%">>,
 		      [Field, <<" LIKE '">>, SVal, <<"'">>];
 		  _ ->
